@@ -896,16 +896,16 @@ public class Keychain {
                     print("error:[\(remoteError!.code)] \(remoteError!.localizedDescription)")
                 }
             }
-            if let credentials = credentials {
-                let credentials = (credentials as NSArray).map { credentials -> [String: String] in
+            if let credentials = credentials as? Array<[String: String]> {
+                let credentials = credentials.map { credentials -> [String: String] in
                     var credential = [String: String]()
-                    if let server = credentials[AttributeServer] as? String {
+                    if let server = credentials[AttributeServer] {
                         credential["server"] = server
                     }
-                    if let account = credentials[AttributeAccount] as? String {
+                    if let account = credentials[AttributeAccount] {
                         credential["account"] = account
                     }
-                    if let password = credentials[SharedPassword] as? String {
+                    if let password = credentials[SharedPassword] {
                         credential["password"] = password
                     }
                     return credential
